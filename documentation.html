@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Documentation</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <header>
+      <h1>Implementation Details</h1>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        
+        <h2>Visualising the algorithms: p5.js</h2>
+        <p>
+            The Javascript framework is p5.js, which is a user-friendly framework for creative coding, which uses the metaphor of a sketch on a canvas to visualise objects.
+        </p>
+        <h3>Sketch: the web canvas</h3>
+        <ol id = "funcdesc">
+          <li>Global Variables</li>
+          <ul>
+            <li><strong>points:</strong> Array of all the points on the canvas</li>
+            <li><strong>hullpoints:</strong> Array of all the points on the convex hull</li>
+            <li><strong>fr:</strong> Rate of animation</li>
+          </ul>
+          <li>setup()</li>
+          <p>This function acts as a constructor for the canvas.</p>
+          <ul>
+            <li><strong>createCanvas()</strong> Initialization of the campus and setting up its HTML parent.</li>
+            <li><strong>frameRate()</strong> Sets the frame rate for the animation.</li>
+            <li>The function calls generatePoints() & setUpButtons() for further execution.</li>
+          </ul>
+          <li>draw()</li>
+          <p>The hull segments are drawn using this function, it sketches portions between each segment.</p>
+
+          <li>generatePoints()</li>
+          <p>Generate points calls for the generation of random points across the canvas over its entire size, the total number of which we can preset.</p>
+
+          <li>setUpButtons()</li>
+          <p>This function sets up the individual buttons that let the user reset points and start/pause the algorithm.</p>
+        </ol>
+
+        <h3>Point</h3>
+        <p>The point constructor is used to define each point on the canvas, set its size and also retrieve a points x-coordinate,y-coordinate and also set the color of a point on the canvas.</p>
+
+        <h3>Jarvis March Implementation</h3>
+        <p>This function is invoked immediately as soon as it is defined, and is used to return the convex hull for the gift wrapping algorithm.</p>
+        <ol id = "funcdesc">
+          <li>Instance Variables</li>
+          <table>
+            <tr>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>hullPoints</strong></td>
+              <td>Array consisting of all hull points.</td>
+            </tr>
+            <tr>
+              <td><strong>currHullIndex</strong></td>
+              <td>Most recent point on convex hull.</td>
+            </tr>
+            <tr>
+              <td><strong>pointIndex</strong></td>
+              <td>Index of point.</td>
+            </tr>
+            <tr>
+              <td><strong>bestAngle</strong></td>
+              <td>Maximum angle created between a hull point and other points.</td>
+            </tr>
+            <tr>
+              <td><strong>angle</strong></td>
+              <td>Angle created between two points.</td>
+            </tr>
+            <tr>
+              <td><strong>bestPoint</strong></td>
+              <td>Point creating greatest angle.</td>
+            </tr>
+            <tr>
+              <td><strong>prevPt</strong></td>
+              <td>Index tracking the last traversed point.</td>
+            </tr>
+          </table>
+          
+          <li>Constructor</li>
+          <p><strong>JarvisMarch():</strong> This function acts as a constructor for the canvas. Initial values for all instance parameters are set to 0, with <strong>prevPt</strong> set to -1.</p>
+          
+          <li>Public Methods:</li>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>run </strong></td>
+              <td>This method executes one iteration of the Jarvis March algorithm. It iterates over all points, calculates the angle between the previous point, the current hull point, and the next point. It selects the point with the maximum angle to be added to the convex hull.</td>
+            </tr>
+            <tr>
+              <td><strong>displayHull </strong></td>
+              <td> This method displays the convex hull by drawing lines between consecutive hull points.</td>
+            </tr>
+            <tr>
+              <td><strong>drawPoints </strong></td>
+              <td>This method displays all the points on the canvas.</td>
+            </tr>
+          </table>
+          
+
+          <li>Private Methods: </li>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>getAngle</strong></td>
+              <td>This method calculates the angle between three points using the Law of Cosines.</td>
+            </tr>
+            <tr>
+              <td><strong>leftMost</strong></td>
+              <td>This method finds the leftmost point among the input points.</td>
+            </tr>
+          </table>
+        </ol>
+
+        <h3>Kirkpatrick-Seidel Implementation</h3>
+        <p>The KPS algorithm function in called as soon as it is invoked, splitting points into two halves, upper and lower, and computing each individual hull.</p>
+        <h4>Upper Hull</h4>
+        <ol id = 'funcdesc'>
+
+          <li>Instance Variables</li>
+          <ul>
+            <table>
+              <tr>
+                  <th>Variable</th>
+                  <th>Description</th>
+              </tr>
+              <tr>
+                  <td><strong>points</strong></td>
+                  <td>Stores the points passed to the constructor.</td>
+              </tr>
+              <tr>
+                  <td><strong>hullPoints</strong></td>
+                  <td>Array holding the points on the convex hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>currHullIndex</strong></td>
+                  <td>Index indicating the most recent point on the convex hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>pointIndex</strong></td>
+                  <td>Index for iterating through points.</td>
+              </tr>
+              <tr>
+                  <td><strong>ends</strong></td>
+                  <td>Array containing the endpoints of the upper hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>upperPts</strong></td>
+                  <td>Array for storing points above the line connecting the endpoints.</td>
+              </tr>
+              <tr>
+                  <td><strong>upperLeft</strong></td>
+                  <td>Array for partitioning upperPts into left subset.</td>
+              </tr>
+              <tr>
+                  <td><strong>upperRight</strong></td>
+                  <td>Array for partitioning upperPts into right subset.</td>
+              </tr>
+              <tr>
+                  <td><strong>tempY1</strong></td>
+                  <td>Temporary variable for calculating upper hull (y-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempY2</strong></td>
+                  <td>Temporary variable for calculating upper hull (y-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempX1</strong></td>
+                  <td>Temporary variable for calculating upper hull (x-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempX2</strong></td>
+                  <td>Temporary variable for calculating upper hull (x-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>bestPoint</strong></td>
+                  <td>Variable for tracking the best point during computation.</td>
+              </tr>
+              <tr>
+                  <td><strong>m</strong></td>
+                  <td>Slope of the line connecting the endpoints.</td>
+              </tr>
+              <tr>
+                  <td><strong>upperCalc</strong></td>
+                  <td>Control variable for upper hull computation.</td>
+              </tr>
+              <tr>
+                  <td><strong>temp</strong></td>
+                  <td>Control variable for upper hull computation.</td>
+              </tr>
+          </table>
+          </ul>
+
+          <li>Constructor ('kP')</li>
+          <ul>
+            <li>Initializes instance variables and sets initial values.</li>
+            <li>Accepts an array of points as input.</li>
+          </ul>
+
+          <li>Public Methods</li>
+          <ul>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>run</strong></td>
+              <td>This method executes one iteration of the Kirkpatrick-Seidel algorithm. Calls <b>computeUpperHull()</b> to compute the upper hull.</td>
+            </tr>
+            <tr>
+              <td><strong>displayHull</strong></td>
+              <td>This method displays the convex hull by drawing lines between consecutive hull points.</td>
+            </tr>
+            <tr>
+              <td><strong>drawPoints</strong></td>
+              <td>This method displays all the points on the canvas.</td>
+            </tr>
+          </table>
+        </ul>
+
+        <li>Private Methods</li>
+        <ul>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>computeUpperHull</strong></td>
+              <td>
+                <ul>
+                  <li>Computes the upper hull of the set of points.</li>
+                  <li>Sorts points above the line connecting the endpoints.</li>
+                  <li>Divides points into left and right subsets based on median.</li>
+                  <li>Recursively calculates upper hull until termination condition is met.</li>
+                </ul>
+                </td>
+            </tr>
+            <tr>
+              <td><strong>leftMost</strong></td>
+              <td>This method finds the leftmost point among the input points.</td>
+            </tr>
+            <tr>
+              <td><strong>rightMost</strong></td>
+              <td>This method finds the rightmost point among the input points.</td>
+            </tr>
+          </table>
+        </ul>
+        </ol>
+
+        <h4>Lower Hull</h4>
+        <ol id = 'funcdesc'>
+
+          <li>Instance Variables</li>
+          <ul>
+            <table>
+              <tr>
+                  <th>Variable</th>
+                  <th>Description</th>
+              </tr>
+              <tr>
+                  <td><strong>points</strong></td>
+                  <td>Stores the points passed to the constructor.</td>
+              </tr>
+              <tr>
+                  <td><strong>hullPoints</strong></td>
+                  <td>Array holding the points on the convex hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>currHullIndex</strong></td>
+                  <td>Index indicating the most recent point on the convex hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>pointIndex</strong></td>
+                  <td>Index for iterating through points.</td>
+              </tr>
+              <tr>
+                  <td><strong>ends</strong></td>
+                  <td>Array containing the endpoints of the lower hull.</td>
+              </tr>
+              <tr>
+                  <td><strong>lowerPts</strong></td>
+                  <td>Array for storing points above the line connecting the endpoints.</td>
+              </tr>
+              <tr>
+                  <td><strong>lowerLeft</strong></td>
+                  <td>Array for partitioning lowerPts into left subset.</td>
+              </tr>
+              <tr>
+                  <td><strong>lowerRight</strong></td>
+                  <td>Array for partitioning lowerPts into right subset.</td>
+              </tr>
+              <tr>
+                  <td><strong>tempY1</strong></td>
+                  <td>Temporary variable for calculating lower hull (y-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempY2</strong></td>
+                  <td>Temporary variable for calculating lower hull (y-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempX1</strong></td>
+                  <td>Temporary variable for calculating lower hull (x-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>tempX2</strong></td>
+                  <td>Temporary variable for calculating lower hull (x-coordinate).</td>
+              </tr>
+              <tr>
+                  <td><strong>bestPoint</strong></td>
+                  <td>Variable for tracking the best point during computation.</td>
+              </tr>
+              <tr>
+                  <td><strong>m</strong></td>
+                  <td>Slope of the line connecting the endpoints.</td>
+              </tr>
+              <tr>
+                  <td><strong>countLower</strong></td>
+                  <td>Control variable for lower hull computation.</td>
+              </tr>
+              <tr>
+                  <td><strong>temp</strong></td>
+                  <td>Control variable for lower hull computation.</td>
+              </tr>
+          </table>
+          </ul>
+
+          <li>Constructor ('kpLower')</li>
+          <ul>
+            <li>Initializes instance variables and sets initial values.</li>
+            <li>Accepts an array of points as input.</li>
+          </ul>
+
+          <li>Public Methods</li>
+          <ul>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>run</strong></td>
+              <td>This method executes one iteration of the Kirkpatrick-Seidel algorithm. Calls <b>computeLowerHull()</b> to compute the lower hull.</td>
+            </tr>
+            <tr>
+              <td><strong>displayHull</strong></td>
+              <td>This method displays the convex hull by drawing lines between consecutive hull points.</td>
+            </tr>
+            <tr>
+              <td><strong>drawPoints</strong></td>
+              <td>This method displays all the points on the canvas.</td>
+            </tr>
+          </table>
+        </ul>
+
+        <li>Private Methods</li>
+        <ul>
+          <table>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>computeLowerHull</strong></td>
+              <td>
+                <ul>
+                  <li>Computes the lower hull of the set of points.</li>
+                  <li>Sorts points above the line connecting the endpoints.</li>
+                  <li>Divides points into left and right subsets based on median.</li>
+                  <li>Recursively calculates upper hull until termination condition is met.</li>
+                </ul>
+                </td>
+            </tr>
+            <tr>
+              <td><strong>leftMost</strong></td>
+              <td>This method finds the leftmost point among the input points.</td>
+            </tr>
+            <tr>
+              <td><strong>rightMost</strong></td>
+              <td>This method finds the rightmost point among the input points.</td>
+            </tr>
+          </table>
+        </ul>
+
+        </ol>
+
+
+
+        
+      </div>
+
+    </div>
+</div>
+</body>
+</html>

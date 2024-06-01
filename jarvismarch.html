@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jarvis March Algorithm</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script> -->
+    <!-- <script src="jarvismarch.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="sketch1.js"></script>
+    <script src="point.js"></script>
+    <script src="jarvismarch.js"></script>
+    <script src="temp.js"></script>
+    <script src="tempLower.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
+    <!-- Linking the separate stylesheet -->
+  </head>
+
+  <body>
+    <header>
+      <h1>Jarvis March Algorithm</h1>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <!-- Include the content related to Jarvis March from the original HTML file -->
+        <h2>Jarvis March: The Gift Wrapping Analogy</h2>
+        <p>
+          Picture this: You have a bunch of nails sticking out of a board. You
+          want to tightly wrap a present using these nails as anchor points.
+        </p>
+        <h3>The process:</h3>
+        <ol>
+          <li>
+            Start at the nail furthest to the left (you can always find this
+            one).
+          </li>
+          <li>
+            Imagine pulling a string taut from this nail. Rotate the string
+            around like a clock hand until it catches on the next nail as if you
+            were wrapping the present.
+          </li>
+          <li>Move to this new nail, and repeat the string process.</li>
+          <li>Keep "wrapping" until you're back where you started.</li>
+        </ol>
+        <p>
+          The key idea: Each time you rotate the string, you find the next point
+          that must form the outer boundary of any wrapping. This makes the
+          Jarvis March a bit like brute force: it checks most points but in an
+          organized way.
+        </p>
+
+        <!-- Interactive Image Section -->
+        <div id="image-container">
+          <img
+            id="interactive-image"
+            src="pseudocode.png"
+            alt="Jarvis March Image"
+          />
+          <div id="image-overlay"></div>
+        </div>
+
+        <h2>Understanding the Algorithm</h2>
+        <ol id="algosteps" start="1">
+          <li>Finding the Starting Point (Leftmost Point)</li>
+          <ul>
+            <li>
+              Imagine a set of points scattered on a plane. The Jarvis March
+              algorithm starts by finding a special point that's guaranteed to
+              be on the convex hull (the outermost boundary).
+            </li>
+            <li>
+              This special point is the one with the
+              <i>smallest x-coordinate</i>. In simpler terms, it's the point
+              that's furthest to the left when you look at them on a graph.
+            </li>
+          </ul>
+          <li>Building the Hull One Point at a Time</li>
+          <ul>
+            <li>
+              Let's call the leftmost point currentPoint. We'll use this point
+              as a reference to find the next point on the convex hull boundary.
+            </li>
+            <li>
+              We initialize an empty list called hull to store the points that
+              will form the convex hull.
+            </li>
+          </ul>
+          <li>Finding the Next Point on the Hull</li>
+          <ul>
+            <li>
+              To find the next point on the hull, we iterate through all the
+              points in the set (S).
+            </li>
+            <li>
+              For each point p in the set, we need to determine its position
+              relative to the line segment formed by currentPoint and another
+              point called endpoint.
+            </li>
+          </ul>
+          <li>Checking Orientation: Counter-Clockwise is Key</li>
+          <ul>
+            <li>
+              Here's the crucial part: we use a helper function called
+              ORIENTATION(currentPoint, p, endpoint) to determine the
+              orientation of three points.
+            </li>
+            <li>
+              This function tells us whether points p and endpoint lie on the
+              left, right, or directly on the line formed by currentPoint and
+              endpoint.
+            </li>
+            <img
+            id="interactive-image"
+            src="jmpic.png"
+            alt="Jarvis March Image"
+          />
+          </ul>
+          <li>Selecting the Best Candidate</li>
+          <ul>
+            <li>
+              There can be multiple points that are counter-clockwise to the
+              line segment formed by currentPoint and endpoint.
+            </li>
+            <li>
+              We need to choose the one that's furthest away from currentPoint.
+              This ensures we're truly following the outer boundary of the
+              convex hull.
+            </li>
+          </ul>
+          <li>Adding the Point and Moving On</li>
+          <ul>
+            <li>
+              Once we've iterated through all points and found the best
+              candidate (endpoint), we've essentially identified the next point
+              on the convex hull boundary.
+            </li>
+            <li>
+              We add this point (endpoint) to the hull list, which is keeping
+              track of the convex hull points so far.
+            </li>
+            
+          </ul>
+          <li>Repeating Until We're Back at the Start</li>
+          <ul>
+            <li>
+              The process of finding the next counter-clockwise point furthest
+              away, adding it to the hull, and updating currentPoint continues
+              until we reach a special condition.
+            </li>
+            <li>
+              We keep iterating as long as currentPoint is not the same as the
+              very first leftmost point we picked initially.
+            </li>
+          </ul>
+          <li>Completing the Convex Hull</li>
+          <ul>
+            <li>
+              By following these steps, we essentially "wrap" around the set of
+              points, adding points to the hull in a counter-clockwise manner
+              until we reach the starting point again.
+            </li>
+            <li>
+              This final list stored in hull represents the complete set of
+              points that form the convex hull of the original set S.
+            </li>
+          </ul>
+        </ol>
+
+        <div>
+          <h2>Time Complexity of the Algorithm</h2>
+          <ol id = 'algosteps'>
+            <li><strong>Initialization:</strong> 
+              <ul>
+                <li>Let n be the number of points in the input set P. The algorithm starts by selecting the leftmost point in P as the starting point of the convex hull. This step takes O(n) time since it involves scanning through all points once.</li>
+              </ul>
+            </li>
+            <li><strong>Looping through Points:</strong> 
+              <ul>
+                <li><strong>a. Loop Iterations:</strong> In each iteration of the loop, the algorithm examines all points in P to find the next point on the convex hull. This involves comparing the angles formed by the current point and all other points. Since there are n points, this step takes O(n) time.</li>
+                <li><strong>b. Angle Computation:</strong> Computing the angle between the current point and every other point requires constant time for each comparison. Hence, it takes O(1) time per comparison.</li>
+                <li><strong>c. Total Time per Iteration:</strong> The total time for each iteration of the loop is O(n) * O(1) = O(n).</li>
+              </ul>
+            </li>
+            <li><strong>Overall Time Complexity:</strong> 
+              <ul>
+                <li>Let h be the number of points on the convex hull. Since each point is visited only once during the construction of the convex hull, and the number of points on the convex hull is generally much smaller than the total number of points (h ≤ n), the overall time complexity of the Jarvis March algorithm is O(nh).</li>
+              </ul>
+            </li>
+            <li><strong>Worst-case Scenario:</strong> 
+              <ul>
+                <li>In the worst-case scenario, where all points are on the convex hull (h = n), the time complexity becomes O(n^2). This occurs, for example, when the points are arranged in a straight line.</li>
+              </ul>
+            </li>
+            <li><strong>Average-case Scenario:</strong> 
+              <ul>
+                <li>In the average case, the time complexity is better than O(n^2) but still depends on the distribution of points. On average, it tends to be closer to O(nh).</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+        
+      </div>
+
+      
+
+      <div id="canvas-container">
+
+          <!-- Buttons will be inserted here -->
+      </div>
+
+      </div>
+    </div>
+
+    
+    
+
+
+    
+  </body>
+</html>

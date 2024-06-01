@@ -1,0 +1,114 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%; /* Increase width of the container */
+    max-width: 1400px; /* Set maximum width */
+    margin: 20px auto;
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.content {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333; /* Dark text color */
+}
+
+h1{
+    text-align: center;
+    font-weight: bolder;
+    color: black;
+}
+
+h2, h3 {
+    font-weight: bold; /* Making headings bold */
+    color: #282a2b; /* Blue color for headings */
+}
+
+h4, h5, h6 {
+    font-weight: bold; /* Making headings bold */
+    color: #505b66; /* Blue color for headings */
+}
+
+h2, h3, h4 {
+    margin-top: 30px; /* Add space above subheadings */
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px; /* Add space below paragraphs */
+}
+
+ul, ol {
+    margin-left: 20px;
+}
+
+/* Links */
+a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+#image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Optional: Set a height to center vertically within the viewport */
+}
+
+#algosteps {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #333;
+}
+
+#algosteps > li {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#algosteps ul li {
+    font-weight: normal;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+#canvas-container{
+    text-align: center;
+}
+
+.button-container {
+    margin-top: 20px; /* Adjust margin top as needed */
+}
+
+#funcdesc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; /* Reduced font size */
+    color: #333;
+}
+
+#funcdesc > li {
+    font-weight: bold;
+    font-size: 18px; /* Reduced font size */
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+#funcdesc ul li {
+    font-weight: normal;
+    font-size: 16px; /* Reduced font size */
+    margin-left: 16px; /* Reduced margin */
+}
