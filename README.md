@@ -5,4 +5,4 @@ In this project, we have tackled the problem of generating convex hulls for a gi
 2. Jarvis March Algorithm
 
 
-https://arjunk1206.github.io/ConvexHullAlgorithms/
+The visualisation is demonstrated in https://arjunk1206.github.io/ConvexHullAlgorithms/
